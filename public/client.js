@@ -1,26 +1,34 @@
 const app = feathers();
 
-// Register a simple todo service that returns the name and some text
-app.use('todos', {
-    async get(a) {
+const myService = {
+    // Main service function async get
+    async get(id) {
         // Return an object in the form of { name, text }
-        return {
-            a0: a[0],
-            a1: a[1],
-            text: `You have to do ${a[0]} and ${a[1]}`
-        };
+        return {id: id, text: this.messages}
+    },
+    messages: [],
+
+    // Mutation
+    create(data, params) {
+        this.messages.push(data);
+
+        return Promise.resolve(data);
     }
-});
+}
+// Register a simple todo service that returns the name and some text
+app.use('todos', myService);
 
 // A function that gets and logs a todo from the service
-async function getTodo(...a) {
+async function getTodo(id, name) {
     // Get the service we registered above
     const service = app.service('todos');
+    service.create({id: id, text: name});
     // Call the `get` method with a name
-    const todo = await service.get(a);
+    const todo = await service.get(id);
 
     // Log the todo we got back
     console.log(todo);
 }
 
-getTodo(3, 4);
+console.log('test');
+getTodo(2, 'hayden');
