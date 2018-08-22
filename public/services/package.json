@@ -1,0 +1,18 @@
+{
+  "name": "services",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server ./"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "feathers": "^2.2.4",
+    "feathers-express": "^1.0.0-pre.1",
+    "rest": "^2.0.0"
+  }
+}
